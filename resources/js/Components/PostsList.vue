@@ -110,14 +110,14 @@ const cancelEdit = () => {
 
 <style scoped>
 .posts-wrapper {
-    padding: 1rem 3rem 3rem;
+    padding: 1rem 1rem 3rem;
 }
 .posts-body {
-    padding: 0 2rem;
+    padding: 0;
 }
 .list-wrapper {
     border-radius: 0.5rem;
-    padding: 1.5rem;
+    padding: 0.125rem;
     background-color: var(--color-white);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
@@ -128,6 +128,7 @@ const cancelEdit = () => {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+    justify-content: center;
 }
 .delete-post-confirmation {
     display: none;
@@ -220,5 +221,19 @@ const cancelEdit = () => {
 }
 .edit-post-confirmation.show .btn-info:hover {
     background-color: var(--color-dark); /* Darker grey on hover */
+}
+@media all and (min-width: 395px) {
+    .posts-wrapper {
+        padding: 1rem 3rem 3rem;
+    }
+}
+@media all and (min-width: 505px) {
+    .posts-body {
+        padding: 0 2rem;
+    }
+
+    .list-wrapper {
+        padding: 1.5rem;
+    }
 }
 </style>

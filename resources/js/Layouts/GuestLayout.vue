@@ -30,7 +30,7 @@ const props = defineProps({
 
             <div
                 v-if="$page.props.auth.user"
-                class="hidden sm:ms-6 sm:flex sm:items-center"
+                class="sm:ms-6 sm:flex sm:items-center"
             >
                 <!-- Settings Dropdown -->
                 <div class="relative ms-3">
@@ -108,7 +108,7 @@ const props = defineProps({
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 0 2rem;
+    padding: 0;
 }
 
 .nav-options,
@@ -125,6 +125,17 @@ const props = defineProps({
 }
 .nav-options li {
     margin: 0 1rem 0 0;
+    align-self: center;
+}
+@media all and (min-width: 395px) {
+    .guest-nav nav {
+        padding: 0;
+    }
+}
+@media all and (min-width: 415px) {
+    .guest-nav nav {
+        padding: 0 1rem;
+    }
 }
 @media all and (min-width: 550px) {
     .guest-nav nav {

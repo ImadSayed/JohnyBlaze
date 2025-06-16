@@ -173,6 +173,14 @@ const showingNavigationDropdown = ref(false);
                             Posts
                         </ResponsiveNavLink>
                     </div>
+                    <div class="">
+                        <ResponsiveNavLink
+                            :href="route('users.index')"
+                            :active="route().current('users.*')"
+                        >
+                            Users
+                        </ResponsiveNavLink>
+                    </div>
 
                     <!-- Responsive Settings Options -->
                     <div class="border-t border-gray-200 pb-1 pt-4">

@@ -49,6 +49,7 @@ defineProps({
 }
 .pagination-body {
     display: flex;
+    flex-direction: column-reverse;
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
@@ -56,6 +57,7 @@ defineProps({
 .pagination-text {
     font-size: 0.875rem;
     color: var(--color-gray-600);
+    margin: 0.25rem 0 0;
 }
 .pagination-count,
 .pagination-increment,
@@ -68,7 +70,7 @@ defineProps({
     gap: 0.5rem;
 }
 .pagination-button {
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem;
     border-radius: 0.375rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     background-color: var(--color-white);
@@ -77,6 +79,10 @@ defineProps({
     font-weight: 400;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
+}
+.pagination-button:first-of-type,
+.pagination-button:last-of-type {
+    border: 1px solid var(--color-grey);
 }
 .pagination-button:hover {
     background-color: var(--color-yellow);
@@ -99,5 +105,24 @@ defineProps({
 }
 .pagination-button span:hover {
     text-decoration: none;
+}
+
+@media all and (min-width: 768px) {
+    .pagination-body {
+        flex-direction: row;
+    }
+    .pagination-text {
+        margin: 0;
+    }
+}
+
+@media all and (min-width: 456px) {
+    .pagination-button:first-of-type,
+    .pagination-button:last-of-type {
+        border: none;
+    }
+    .pagination-button {
+        padding: 0.5rem 0.75rem;
+    }
 }
 </style>

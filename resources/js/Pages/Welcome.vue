@@ -45,24 +45,23 @@ main.homepage {
 }
 main.homepage section.container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column-reverse;
     width: 90%;
     justify-content: flex-start;
 }
 main.homepage section.container .image-container {
-    margin-top: 2rem;
+    margin-top: 1rem;
     display: flex;
     height: 80dvh;
-    width: 40%;
+    min-width: 40%;
 }
 main.homepage section.container .image-container img {
     display: block;
     margin: 0 auto;
 }
 main.homepage section.container .text-container {
-    margin-top: 5rem;
-    height: 80dvh;
-    width: 60%;
+    margin-top: 1rem;
+    width: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -74,5 +73,23 @@ main.homepage section.container .text-container h1 {
 }
 main.homepage section.container .text-container h1 > span {
     font-size: 1.5rem;
+}
+
+@media all and (min-width: 700px) {
+    main.homepage section.container .text-container {
+        width: 60%;
+    }
+}
+@media all and (min-width: 620px) {
+    main.homepage section.container {
+        flex-direction: row;
+    }
+    main.homepage section.container .text-container {
+        margin-top: 5rem;
+        height: 80dvh;
+    }
+    main.homepage section.container .image-container {
+        margin-top: 2rem;
+    }
 }
 </style>

@@ -129,7 +129,7 @@ const cancelDelete = () => {
     font-weight: bold;
 }
 .users-wrapper {
-    padding: 1rem 5rem;
+    padding: 1rem;
 }
 .users-table {
     width: 100%;
@@ -138,7 +138,7 @@ const cancelDelete = () => {
     background-color: var(--color-white);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     border-radius: 0.5rem;
-    overflow: hidden;
+    overflow: auto;
     padding: 1rem;
 }
 .user-table {
@@ -229,5 +229,10 @@ const cancelDelete = () => {
 }
 .delete-confirmation.show button:hover {
     background-color: var(--color-dark);
+}
+@media all and (min-width: 700px) {
+    .users-wrapper {
+        padding: 1rem 5rem;
+    }
 }
 </style>
