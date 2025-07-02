@@ -97,9 +97,9 @@ const props = defineProps({
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: var(--color-gray-100);
+    background-color: var(--color-white);
     padding: 0 2rem;
-    border-bottom: 1px solid var(--color-gray-200);
+    border-bottom: 1px solid var(--color-dark);
     height: 4rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }

@@ -14,13 +14,15 @@ const props = defineProps({
         required: true,
     },
 });
+let removeImage = false;
 
 const form = useForm({
     id: props.post.id,
     userId: props.user.data.id,
     caption: props.post.caption || "",
-    image: props.post.image || "",
+    image: props.post.image,
     media: props.post.media || "",
+    removeImage: removeImage,
 });
 </script>
 
@@ -33,7 +35,7 @@ const form = useForm({
             </h2>
         </template>
 
-        <div class="create-post-wrapper">
+        <div class="edit-post-wrapper">
             <form @submit.prevent="form.post(route('posts.update', form))">
                 <div class="form-group">
                     <label for="caption">Caption</label>
@@ -53,8 +55,8 @@ const form = useForm({
                         >Image:
                         {{
                             form.image ? "image selected" : "no image selected"
-                        }}</label
-                    >
+                        }}
+                    </label>
                     <input
                         type="file"
                         id="image"
@@ -63,6 +65,16 @@ const form = useForm({
                         :class="{ 'is-invalid': form.errors.image }"
                     />
                     <InputError :message="form.errors.image" class="mt-2" />
+                    <div class="removeImage">
+                        <label for="removeImageCheckbox">
+                            Remove Image Cover
+                        </label>
+                        <input
+                            id="removeImageCheckbox"
+                            type="checkbox"
+                            v-model="form.removeImage"
+                        />
+                    </div>
                 </div>
                 <div class="form-group">
                     <button
@@ -111,7 +123,7 @@ const form = useForm({
 .btn-primary:hover {
     background-color: #0056b3; /* Darker blue on hover */
 }
-.create-post-wrapper {
+.edit-post-wrapper {
     max-width: 600px;
     margin: 1rem auto 0;
     padding: 2rem;
@@ -119,43 +131,52 @@ const form = useForm({
     border-radius: 0.5rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
-.create-post-wrapper h2 {
+.edit-post-wrapper h2 {
     margin-bottom: 1rem;
     text-align: center;
 }
-.create-post-wrapper form {
+.edit-post-wrapper form {
     display: flex;
     flex-direction: column;
 }
-.create-post-wrapper .form-group {
+.edit-post-wrapper .form-group {
     margin-bottom: 1rem;
 }
-.create-post-wrapper .form-control {
+.edit-post-wrapper .form-control {
     padding: 0.5rem;
     border: 1px solid #ced4da; /* Bootstrap border color */
     border-radius: 0.25rem;
 }
-.create-post-wrapper .btn {
+.edit-post-wrapper .btn {
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 0.25rem;
     cursor: pointer;
 }
-.create-post-wrapper .btn-primary {
+.edit-post-wrapper .btn-primary {
     background-color: #007bff; /* Bootstrap primary color */
     color: white;
 }
-.create-post-wrapper .btn-primary:hover {
+.edit-post-wrapper .btn-primary:hover {
     background-color: #0056b3; /* Darker blue on hover */
 }
-.create-post-wrapper .btn-info {
+.edit-post-wrapper .btn-info {
     background-color: var(--color-grey); /* Bootstrap info color */
     color: white;
 }
-.create-post-wrapper .btn-info:hover {
+.edit-post-wrapper .btn-info:hover {
     background-color: var(--color-dark); /* Darker grey on hover */
 }
-.create-post-wrapper .back-button {
+.edit-post-wrapper .back-button {
     margin-bottom: 1rem;
+}
+.edit-post-wrapper .removeImage {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.edit-post-wrapper .removeImage #removeImageCheckbox {
+    margin: 0.25rem 0 0 1rem;
+    align-self: center;
 }
 </style>

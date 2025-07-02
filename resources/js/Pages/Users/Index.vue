@@ -99,7 +99,7 @@ const cancelDelete = () => {
                 v-bind:type="'danger'"
                 v-bind:label="'Delete'"
                 v-bind:route="'users.destroy'"
-                v-bind:id="userToDelete"
+                v-bind:id="deleteUserId"
             ></Button>
             <button
                 class="btn btn-info cancel-delete"

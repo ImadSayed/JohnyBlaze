@@ -58,6 +58,7 @@ defineProps({
     font-size: 0.875rem;
     color: var(--color-gray-600);
     margin: 0.25rem 0 0;
+    white-space: nowrap;
 }
 .pagination-count,
 .pagination-increment,

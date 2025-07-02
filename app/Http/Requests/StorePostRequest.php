@@ -18,18 +18,18 @@ class StorePostRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string>, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
             'userId' => 'required|exists:users,id',
             'caption' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:524288',//|max:2048
             'media' => 'required',
-            'media.*' => 'file|mimes:mp4,mov,3gpp|max:2048', // Validate each media file
-            'media.*.type' => 'required|string|in:video,audio', // Ensure each media file has a type
-            'media.*.url' => 'required|url', // Ensure each media file has a valid URL
+            'media.*' => 'file|mimes:mp4,mov,3gpp|max:524288', // Validate each media file |max:2048
+            // 'media.*.type' => 'required|string|in:video,audio', // Ensure each media file has a type
+            // 'media.*.url' => 'required|url', // Ensure each media file has a valid URL
         ];
     }
 }

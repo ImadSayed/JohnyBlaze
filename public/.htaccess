@@ -5,6 +5,13 @@
 
     RewriteEngine On
 
+    AddType video/mp4 .mp4
+
+    Header set Access-Control-Allow-Origin "https://johnyblaze.imadsayed.co.uk"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS, PUT, DELETE"
+    Header set Access-Control-Allow-Headers "Authorization, Content-Type"
+
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
@@ -21,15 +28,7 @@
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php [L]
+    RewriteRule ^(.+)$ /index.php [L]
 
 </IfModule>
 
-AddType video/mp4 .mp4
-AddType video/3gpp .3gp
-AddType video/ogg .ogv
-AddType video/mp4 .m4v
-AddType video/3gpp .3g2
-AddType video/webm .webm
-AddType audio/mp3 .mp3
-AddType audio/ogg .oga

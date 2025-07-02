@@ -1,7 +1,9 @@
 <script setup>
 import { useForm, Head } from "@inertiajs/vue3";
+import { ref } from "vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import InputError from "@/Components/InputError.vue";
+import ProgressBar from "@/Components/ProgressBar.vue";
 
 document.title = "Create Post";
 const props = defineProps({
@@ -17,6 +19,42 @@ const form = useForm({
     image: "",
     media: "",
 });
+
+let uploading = ref(false);
+let progress = ref(0);
+let message = ref("");
+
+const uploadForm = async () => {
+    uploading.value = true;
+    const formData = new FormData();
+    formData.append("userId", form.userId);
+    formData.append("caption", form.caption);
+    if (form.image) {
+        formData.append("image", form.image);
+    }
+    if (form.media) {
+        formData.append("media", form.media);
+    }
+    try {
+        await axios.post("/upload", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+            onUploadProgress: (progressEvent) => {
+                progress.value = Math.round(
+                    (progressEvent.loaded * 100) / progressEvent.total
+                );
+            },
+        });
+        message.value = "Success";
+        window.location.href = "/posts";
+    } catch (error) {
+        console.log("Error: " + error);
+        message.value = "Failed to upload";
+    } finally {
+        uploading.value = false;
+    }
+};
 </script>
 
 <template>
@@ -29,7 +67,7 @@ const form = useForm({
         </template>
 
         <div class="create-post-wrapper">
-            <form @submit.prevent="form.post(route('posts.store'))">
+            <form @submit.prevent="uploadForm">
                 <div class="form-group">
                     <label for="caption">Caption</label>
                     <input
@@ -69,7 +107,8 @@ const form = useForm({
                     <button
                         type="submit"
                         class="btn btn-primary"
-                        v-on:click="form.post(route('posts.store'))"
+                        v-on:click="uploadForm"
+                        :disabled="uploading"
                     >
                         Create Post
                     </button>
@@ -80,6 +119,10 @@ const form = useForm({
                     Back to Posts
                 </a>
             </div>
+            <ProgressBar
+                :progress="progress"
+                :uploading="uploading"
+            ></ProgressBar>
         </div>
     </AuthenticatedLayout>
 </template>
@@ -119,6 +162,7 @@ const form = useForm({
     background-color: #f8f9fa; /* Light background */
     border-radius: 0.5rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 .create-post-wrapper h2 {
     margin-bottom: 1rem;

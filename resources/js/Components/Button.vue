@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps } from "vue";
+import { computed } from "vue";
 
 const props = defineProps({
     type: {
@@ -20,7 +20,7 @@ const props = defineProps({
     },
 });
 
-const link = route(props.route, props.id);
+let link = computed(() => route(props.route, props.id));
 </script>
 
 <template>
